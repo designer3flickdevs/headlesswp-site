@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 
 const Navbar = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -8,7 +7,6 @@ const Navbar = () => {
   const handleNav = () => setNav(!nav);
 
   useEffect(() => {
-    // Fetch menu from WordPress API
     fetch("http://localhost/headless_wordpress/server/wp-json/wp-api-menus/v2/menus/17")
       .then((response) => response.json())
       .then((data) => {
@@ -33,10 +31,13 @@ const Navbar = () => {
         ))}
       </ul>
 
-      {/* Mobile Menu Icon */}
-      <div onClick={handleNav} className="block md:hidden cursor-pointer">
-        {nav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
-      </div>
+      {/* Mobile Menu Button (No Icons) */}
+      <button
+        onClick={handleNav}
+        className="block md:hidden text-3xl font-bold focus:outline-none"
+      >
+        {nav ? "✖️" : "☰"}
+      </button>
 
       {/* Mobile Menu Drawer */}
       <ul
