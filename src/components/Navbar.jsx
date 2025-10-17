@@ -7,7 +7,7 @@ const Navbar = () => {
   const handleNav = () => setNav(!nav);
 
   useEffect(() => {
-    fetch("http://localhost/headless_wordpress/server/wp-json/wp-api-menus/v2/menus/17")
+    fetch("https://exultantrobin.s3-tastewp.com/wp-json/wp-api-menus/v2/menus/17")
       .then((response) => response.json())
       .then((data) => {
         if (data.items) {
