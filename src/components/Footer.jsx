@@ -1,82 +1,50 @@
 import React, { useState, useEffect } from "react";
-// import {
-//   FaDribbbleSquare,
-//   FaFacebookSquare,
-//   FaGithubSquare,
-//   FaInstagram,
-//   FaTwitterSquare,
-// } from 'react-icons/fa';
 
 const Footer = () => {
+  const [menus, setMenus] = useState([]);
+  const menuIds = [19, 20, 21];
 
-    const [footerMenu, setMenuItems] = useState([]);
-      const [nav, setNav] = useState(false);
-    
-      const handleFooterNav = () => setNav(!nav);
-    
-      useEffect(() => {
-        fetch("https://exultantrobin.s3-tastewp.com/wp-json/wp-api-menus/v2/menus/17")
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.items) {
-              setMenuItems(data.items);
-            }
-          })
-          .catch((error) => console.error("Error fetching menu:", error));
-      }, []);
-    
+  useEffect(() => {
+    Promise.all(
+      menuIds.map((id) =>
+        fetch(`https://exultantrobin.s3-tastewp.com/wp-json/wp-api-menus/v2/menus/${id}`)
+          .then((res) => res.json())
+          .catch((err) => console.error(`Error fetching menu ${id}:`, err))
+      )
+    ).then((data) => {
+      const formatted = data.map((menu) => ({
+        name: menu?.name || "Menu",
+        items: menu?.items || [],
+      }));
+      setMenus(formatted);
+    });
+  }, []);
 
   return (
-    <div className='max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300'>
+    <div className="max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300">
+      {/* Left section */}
       <div>
-        <h1 className='w-full text-3xl font-bold text-[#00df9a]'>REACT.</h1>
-        <p className='py-4'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id odit ullam iste repellat consequatur libero reiciendis, blanditiis accusantium.</p>
-        <div className='flex justify-between md:w-[75%] my-6'>
-            {/* <FaFacebookSquare size={30} />
-            <FaInstagram size={30} />
-            <FaTwitterSquare size={30} />
-            <FaGithubSquare size={30} />
-            <FaDribbbleSquare size={30} /> */}
-        </div>
+        <h1 className="w-full text-3xl font-bold text-[#00df9a]">REACT.</h1>
+        <p className="py-4">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Id odit ullam
+          iste repellat consequatur libero reiciendis, blanditiis accusantium.
+        </p>
       </div>
-      <div className='lg:col-span-2 flex justify-between mt-6'>
-    <div>
-        <h6 className='font-medium text-gray-400'>Solutions</h6>
-        <ul className="hidden md:flex">
-        {footerMenu.map((item) => (
-          <li key={item.ID} className="p-4">
-            <a href={item.url}>{item.title}</a>
-          </li>
+
+      {/* Menus section */}
+      <div className="lg:col-span-2 flex justify-between mt-6 flex-wrap">
+        {menus.map((menu, index) => (
+          <div key={index}>
+            <h6 className="font-medium text-gray-400">{menu.name}</h6>
+            <ul>
+              {menu.items.map((item) => (
+                <li key={item.ID} className="py-2 text-sm">
+                  <a href={item.url}>{item.title}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </ul>
-    </div>
-    <div>
-        <h6 className='font-medium text-gray-400'>Support</h6>
-        <ul>
-            <li className='py-2 text-sm'>Pricing</li>
-            <li className='py-2 text-sm'>Documentation</li>
-            <li className='py-2 text-sm'>Guides</li>
-            <li className='py-2 text-sm'>API Status</li>
-        </ul>
-    </div>
-    <div>
-        <h6 className='font-medium text-gray-400'>Company</h6>
-        <ul>
-            <li className='py-2 text-sm'>About</li>
-            <li className='py-2 text-sm'>Blog</li>
-            <li className='py-2 text-sm'>Jobs</li>
-            <li className='py-2 text-sm'>Press</li>
-            <li className='py-2 text-sm'>Careers</li>
-        </ul>
-    </div>
-    <div>
-        <h6 className='font-medium text-gray-400'>Legal</h6>
-        <ul>
-            <li className='py-2 text-sm'>Claim</li>
-            <li className='py-2 text-sm'>Policy</li>
-            <li className='py-2 text-sm'>Terms</li>
-        </ul>
-    </div>
       </div>
     </div>
   );
