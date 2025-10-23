@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const Footer = () => {
   const [menus, setMenus] = useState([]);
-  const menuIds = [19, 20, 21];
+  const menuIds = [19, 20, 21,22];
 
   useEffect(() => {
     Promise.all(
