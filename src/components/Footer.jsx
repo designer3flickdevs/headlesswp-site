@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 // import {
 //   FaDribbbleSquare,
 //   FaFacebookSquare,
@@ -8,6 +8,24 @@ import React from 'react';
 // } from 'react-icons/fa';
 
 const Footer = () => {
+
+    const [footerMenu, setMenuItems] = useState([]);
+      const [nav, setNav] = useState(false);
+    
+      const handleFooterNav = () => setNav(!nav);
+    
+      useEffect(() => {
+        fetch("https://exultantrobin.s3-tastewp.com/wp-json/wp-api-menus/v2/menus/17")
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.items) {
+              setMenuItems(data.items);
+            }
+          })
+          .catch((error) => console.error("Error fetching menu:", error));
+      }, []);
+    
+
   return (
     <div className='max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300'>
       <div>
