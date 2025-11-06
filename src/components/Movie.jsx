@@ -21,24 +21,10 @@ const Movie = () => {
                         const shortContent = content.replace(/<[^>]+>/g, "").slice(0, 120) + "..."; // strip HTML & limit length
 
                         return (
-                            <div
-                            key={movie.id}
-                            className="border border-gray-700 p-6 rounded-xl bg-gray-800 hover:bg-gray-700 transition-all"
-                            >
-                            <h2
-                                className="text-[24px] font-semibold text-white mb-3"
-                                dangerouslySetInnerHTML={{ __html: movie.title.rendered }}
-                            />
-                            <p className="text-[16px] text-gray-300 leading-relaxed mb-4">
-                                {shortContent}
-                            </p>
-
-                            <a
-                                href={`/movie/${movie.slug}`}
-                                className="inline-block mt-auto text-sm font-medium text-blue-400 hover:text-blue-300 border border-blue-400 px-4 py-2 rounded-lg transition-all"
-                            >
-                                Learn More →
-                            </a>
+                            <div key={movie.id} className="border border-gray-700 p-6 rounded-xl bg-gray-800 hover:bg-gray-700 transition-all">
+                            <h2 className="text-[24px] font-semibold text-white mb-3" dangerouslySetInnerHTML={{ __html: movie.title.rendered }} />
+                            <p className="text-[16px] text-gray-300 leading-relaxed mb-4">{shortContent}</p>
+                            <a href={`/movie/${movie.slug}`} className="inline-block mt-auto text-sm font-medium text-blue-400 hover:text-blue-300 border border-blue-400 px-4 py-2 rounded-lg transition-all"> Learn More →</a>
                             </div>
                         );
                     })}
