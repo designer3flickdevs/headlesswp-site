@@ -7,7 +7,7 @@ const Footer = () => {
   useEffect(() => {
     Promise.all(
       menuIds.map((id) =>
-        fetch(`http://localhost/headless_wordpress/server/wp-json/wp-api-menus/v2/menus/${id}`)
+        fetch(`https://thankfullocket.s6-tastewp.com/wp-json/wp-api-menus/v2/menus/${id}`)
           .then((res) => res.json())
           .catch((err) => console.error(`Error fetching menu ${id}:`, err))
       )

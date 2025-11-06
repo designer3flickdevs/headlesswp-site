@@ -5,7 +5,7 @@ const Movie = () => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost/headless_wordpress/server/wp-json/wp/v2/movie')
+        fetch('https://thankfullocket.s6-tastewp.com/wp-json/wp/v2/movie')
         .then((res) => res.json())
         .then((data) => setMovies(data))
         .catch((err) => console.error(err));
