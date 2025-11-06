@@ -7,7 +7,7 @@ const Navbar = () => {
   const handleNav = () => setNav(!nav);
 
   useEffect(() => {
-    fetch("https://exultantrobin.s3-tastewp.com/wp-json/wp-api-menus/v2/menus/17")
+    fetch("http://localhost/headless_wordpress/server/wp-json/wp-api-menus/v2/menus/17")
       .then((response) => response.json())
       .then((data) => {
         if (data.items) {
@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-5 text-white">
       {/* Logo */}
-      <h1 className="text-3xl font-bold text-[#00df9a]">REACT12355</h1>
+      <h1 className="text-3xl font-bold text-[#00df9a]">REACT</h1>
 
       {/* Desktop Menu */}
       <ul className="hidden md:flex">
