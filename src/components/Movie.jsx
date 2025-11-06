@@ -13,7 +13,7 @@ const Movie = () => {
 
     return (
         <div className="p-10 bg-gray-900 min-h-screen">
-            <h1 className="text-3xl font-bold text-white mb-6">🎬 Movies</h1>
+            <h1 className="text-3xl font-bold text-white mb-6">Movies</h1>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {movies.map((movie) => (
